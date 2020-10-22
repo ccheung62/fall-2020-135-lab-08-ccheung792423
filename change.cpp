@@ -38,3 +38,32 @@ void pixelate (int arr[MAX_H][MAX_W], int h, int w){
   }
   writeImage("taskF.pgm", f, h, w);
 } 
+
+
+//Task G
+void kernel (int arr[MAX_H][MAX_W], int h, int w){
+  int k[MAX_H][MAX_W];
+  int a, b, c, d, e, f, g, ho, i;
+  for (int row = 0; row < h; row++){
+    for(int col = 0; col < w; col++){
+      a = arr[row-1][col-1];
+      b = arr[row-1][col];
+      c = arr[row-1][col+1];
+      d = arr[row][col-1];
+      g = arr[row+1][col-1];
+      f = arr[row][col+1];
+      i = arr[row+1][col+1];
+      ho = arr[row+1][col];
+      if ((g+(2*ho)+i)-(a+(2*b)+c) >= 256){
+	k[row][col] = 255;
+      }
+      else if ((g+(2*ho)+i)-(a+(2*b)+c) <= 0){
+	k[row][col] = 0;
+      }
+      else {
+	k[row][col] = (g+(2*ho)+i)-(a+(2*b)+c);
+      }
+    }
+  }
+  writeImage("taskG.pgm", k, h, w);
+}
