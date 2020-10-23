@@ -12,7 +12,7 @@
 int main()
 {
 
-  std::string input = "image2.pgm";
+  std::string input = "image2.pgm"; //produce only for image2.pgm
   int img[MAX_H][MAX_W];
   int h, w;
   readImage(input, img, h, w); // read it from the file "inImage.pgm"
