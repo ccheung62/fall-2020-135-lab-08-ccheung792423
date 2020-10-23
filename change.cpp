@@ -5,18 +5,31 @@
 
 //Task E
 void scale (int arr[MAX_H][MAX_W], int h, int w) {
-  //the function produce the image until it reaches MAX_H and MAX_W, so the image is crop and only 1/4 of the image is produced in the resulting image
+  //the function produce the image until it reaches MAX_H and MAX_W, so if the image is too large, it will crop and only 1/4 of the image would be produced in the resulting image
   
   int e[MAX_H][MAX_W];
-  for (int row = 0; row < MAX_H/2; row++){
-    for (int col = 0; col < MAX_W/2; col++){
-      e[row*2][col*2] = arr[row][col]; //add the current pixiel to four pixels of the new array 
-      e[(row*2)+1][col*2] = arr[row][col]; 
-      e[row*2][(col*2)+1] = arr[row][col];
-      e[(row*2)+1][(col*2)+1] = arr[row][col];
+  if (MAX_H < h*2 || MAX_W < w*2) { //check if the scaled could fit in MAX_H and MAX_W
+    for (int row = 0; row < MAX_H/2; row++){
+      for (int col = 0; col < MAX_W/2; col++){
+	e[row*2][col*2] = arr[row][col]; //add the current pixiel to four pixels of the new array 
+	e[(row*2)+1][col*2] = arr[row][col]; 
+	e[row*2][(col*2)+1] = arr[row][col];
+	e[(row*2)+1][(col*2)+1] = arr[row][col];
+      }
     }
-  }
   writeImage("taskE.pgm", e, MAX_H, MAX_W); //produce the image as taskE.pgm
+  }
+  else {
+    for (int row = 0; row < h; row++){
+      for (int col = 0; col < w; col++){
+	e[row*2][col*2] = arr[row][col]; //add the current pixiel to four pixels of the new array 
+	e[(row*2)+1][col*2] = arr[row][col]; 
+	e[row*2][(col*2)+1] = arr[row][col];
+	e[(row*2)+1][(col*2)+1] = arr[row][col];
+      }
+    }
+  writeImage("taskE.pgm", e, h*2, w*2); //produce the image as taskE.pgm
+  }
 }
 
 
